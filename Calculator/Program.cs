@@ -5,34 +5,49 @@ CalculatorApp();
 
 void CalculatorApp()
 {
-    // Declare the variables and initialise them to 0
-    int firstNumber = 0;
-    int secondNumber = 0;
-    int result = 0;
-    int choice = 0;
+    try
+    {
+        Console.WriteLine("Enter the first number");
+        int firstNumber = Convert.ToInt32(Console.ReadLine());
 
-    // Ask the user to input the first number
-    Console.WriteLine("Type in the first number, and then press Enter");
-    firstNumber = Convert.ToInt32(Console.ReadLine());
+        Console.WriteLine("Enter the second number");
+        int secondNumber = Convert.ToInt32(Console.ReadLine());
 
-    // Ask the user to input the second number
-    Console.WriteLine("Type in the second number, and then press Enter");
-    secondNumber = Convert.ToInt32(Console.ReadLine());
+        Console.WriteLine("Enter the operation (+, -, *, /): ");
 
-    // Use a loop to make the relevant decision
-    // and perform the request maths operation
-    Console.WriteLine("Choose an option from the following list:");
-    Console.WriteLine("1 - Add");
-    Console.WriteLine("2 - Subtract");
-    Console.WriteLine("3 - Divide");
-    Console.WriteLine("4 - Multiply");
+        char operation = Convert.ToChar(Console.ReadLine());
+        int result = 0;
 
-    // Convert string to integer
-    choice = Convert.ToInt32(Console.ReadLine());
-
-    // perform the calculation
-    result = firstNumber + secondNumber;
-
-    // Now input the answer to the console
-    Console.WriteLine("Adding {0} and {1} gives the answer {2}", firstNumber, secondNumber, result);
+        switch (operation)
+        {
+            case '+':
+                result = firstNumber + secondNumber;
+                break;
+            case '-':
+                result = firstNumber - secondNumber;
+                break;
+            case '*':
+                result = firstNumber * secondNumber;
+                break;
+            case '/':
+                result = firstNumber / secondNumber;
+                break;
+            default:
+                Console.WriteLine("Invalid Operation");
+                return;
+        }
+        Console.WriteLine($"Result: {result}");
+    }
+    catch (FormatException ex)
+    {
+        Console.WriteLine($"Error:{ex.Message}. Please enter a valid operation.");
+    }
+    catch(DivideByZeroException ex)
+    {
+        Console.WriteLine($"You cannot divide by zero.");
+    }
+    finally
+    {
+        Console.WriteLine("Operation completed");
+    }
 }
